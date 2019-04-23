@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+  <head>
+    <title>Hacky Hour</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Tampa R Users Group" />
+    <meta name="date" content="2019-04-23" />
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: middle, left, title-slide
+
+# Hacky Hour
+## 📊 #TidyTuesday
+### Tampa R Users Group
+### 2019-04-23
+
+---
+
+
+
+
+
+
+class: inverse center middle
+
+# What is #TidyTuesday?
+
+---
+
+class: middle
+
+.pull-left.mh-560[
+![](https://d33wubrfki0l68.cloudfront.net/b88ef926a004b0fce72b2526b0b5c4413666a4cb/24a30/cover.png)
+]
+
+.pull-right[
+&lt;p style="padding-top: 8em"&gt;&lt;/p&gt;
+## r4ds.had.co.nz
+]
+
+
+---
+
+class: center top
+background-image: url(https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/static/tt_logo.png)
+
+### github.com/rfordatascience/tidytuesday
+
+---
+
+.pull-left.mh-560[
+![](images/tt-tweet-release.png)
+]
+
+--
+
+.pull-right.mh-560[
+![](images/tt-gh.png)
+]
+
+---
+
+class: center middle
+
+### #TidyTuesday
+
+.mh-560[
+![](images/tt-twitter-01.jpg)
+![](images/tt-twitter-02.jpg) 
+![](images/tt-twitter-03.jpg)
+]
+
+---
+
+### nsgrantham.shinyapps.io/tidytuesdayrocks
+
+&lt;div style="width: 100%; max-height: 80%"&gt;
+&lt;iframe width="100%" style="position: absolute; height: 100%; border: none" src="https://nsgrantham.shinyapps.io/tidytuesdayrocks/"&gt;&lt;/iframe&gt;
+&lt;/div&gt;
+
+---
+
+class: inverse center middle
+
+# Meet Our Data
+
+---
+
+background-image: url(images/tt-anime.jpg)
+background-size: cover
+background-position: top left
+
+---
+
+class: huge
+
+## How To Get The Data
+
+
+1. &lt;https://github.com/TampaUseRs/hacky-hour-april-2019&gt;
+
+2. &lt;https://rstudio.cloud/project/323454&gt;
+
+3. &amp;#x1F64B;&amp;#x200D;&amp;#x2642;&amp;#xFE0F; See Garrick for &amp;#x1F4BE;
+
+---
+
+## tidytuesday_anime.R
+
+```r
+library(tidyverse)
+
+anime &lt;- read_csv("data/tidy_anime.csv")
+```
+
+---
+
+## Data Dictionary
+
+.scroll-y[
+
+|variable       |class     |description |
+|:--------------|:---------|:-----------|
+|animeID        |double    | Anime ID (as in https://myanimelist.net/anime/animeID)          |
+|name           |character |anime title - extracted from the site.           |
+|title_english  |character | title in English (sometimes is different, sometimes is missing)          |
+|title_japanese |character | title in Japanese (if Anime is Chinese or Korean, the title, if available, in the respective language)          |
+|title_synonyms |character | other variants of the title         |
+|type           |character | anime type (e.g. TV, Movie, OVA)          |
+|source         |character | source of anime (i.e original, manga, game, music, visual novel etc.)         |
+|producers      |character | producers          |
+|genre          |character | genre         |
+|studio         |character | studio           |
+|episodes       |double    | number of episodes           |
+|status         |character | Aired or not aired      |
+|airing         |logical   | True/False is still airing          |
+|start_date     |double    | Start date (ymd)        |
+|end_date       |double    | End date (ymd)        |
+|duration       |character | Per episode duration or entire duration, text string        |
+|rating         |character | Age rating         |
+|score          |double    | Score (higher = better)       |
+|scored_by      |double    | Number of users that scored          |
+|rank           |double    | Rank - weight according to MyAnimeList formula          |
+|popularity     |double    |  based on how many members/users have the respective anime in their list          |
+|members        |double    | number members that added this anime in their list         |
+|favorites      |double    | number members that favorites these in their list          |
+|synopsis       |character | long string with anime synopsis          |
+|background     |character | long string with production background and other things          |
+|premiered      |character | anime premiered on season/year          |
+|broadcast      |character | when is (regularly) broadcasted         |
+|related        |character | dictionary: related animes, series, games etc.         |
+
+]
+
+---
+
+class: center middle inverse
+
+# Human K-Means Clustering
+
+---
+class: huge middle center
+layout: true
+---
+
+.pull-left.big[
+**Tidyverse**
+
+.big[&amp;#x1F448;&amp;#x1F3FC;]
+]
+
+.pull-right.big[
+**Base R**
+
+.big[&amp;#x1F449;&amp;#x1F3FC;]
+]
+
+---
+
+.pull-left.big[
+`ggplot()`
+
+.big[&amp;#x1F446;&amp;#x1F3FC;]
+]
+
+.pull-right.big[
+`par(mfrow = 2)`
+
+.big[&amp;#x1F447;&amp;#x1F3FC;]
+]
+
+---
+
+.pull-left.big[
+**spaces**
+
+.big[&amp;#x1F448;&amp;#x1F3FC;]
+]
+
+.pull-right.big[
+**tabs**
+
+.big[&amp;#x1F449;&amp;#x1F3FC;]
+]
+
+---
+
+.pull-left.big[
+**static**
+
+.big[&amp;#x1F446;&amp;#x1F3FC;]
+]
+
+.pull-right.big[
+**animated**
+
+.big[&amp;#x1F447;&amp;#x1F3FC;]
+]
+
+---
+
+.pull-left.big[
+**data cleaning**
+
+.big[&amp;#x1F448;&amp;#x1F3FC;]
+]
+
+.pull-right.big[
+**data viz**
+
+.big[&amp;#x1F449;&amp;#x1F3FC;]
+]
+
+---
+
+.pull-left.big[
+**data viz**
+
+.big[&amp;#x1F446;&amp;#x1F3FC;]
+]
+
+.pull-right.big[
+**modeling**
+
+.big[&amp;#x1F447;&amp;#x1F3FC;]
+]
+
+---
+background-image: url(https://media.giphy.com/media/dvgefaMHmaN2g/giphy.gif)
+background-size: cover
+---
+
+
+.pull-left.big[
+**new to R**
+
+.big[&amp;#x1F448;&amp;#x1F3FC;]
+]
+
+.pull-right.big[
+**old to R**
+
+.big[&amp;#x1F449;&amp;#x1F3FC;]
+]
+
+---
+
+.pull-left.big[
+**Want to Teach**
+
+.big[&amp;#x1F446;&amp;#x1F3FC;]
+]
+
+.pull-right.big[
+**Want to Learn**
+
+.big[&amp;#x1F447;&amp;#x1F3FC;]
+]
+
+
+---
+
+.pull-left.big[
+**R**
+
+&amp;nbsp;
+]
+
+.pull-right.big[
+**Python**
+
+&amp;nbsp;
+]
+
+---
+
+.pull-left.big[
+**R**
+
+.big[&amp;#x1F37B;]
+]
+
+.pull-right.big[
+**Python**
+
+.big[&amp;#x1F3C3;&amp;#x1F3FD;&amp;#x1F4A8;]
+]
+
+---
+layout: false
+class: inverse center middle
+
+# Clustering Process
+
+---
+
+class: huge
+
+# Have Fun!
+
+1. Yellow Post-It if you need help
+
+1. We have `ggplot2` cheat sheets!
+
+1. Tweet your creations to [&amp;commat;UseRTampa](https://twitter.com/UseRTampa)  or [#TidyTuesday](https://twitter.com/hashtag/TidyTuesday)
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"slideNumberFormat": "%current%",
+"highlightStyle": "github",
+"highlightLines": true,
+"ratio": "16:9",
+"countIncrementalSlides": true
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();</script>
+
+<script>
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
